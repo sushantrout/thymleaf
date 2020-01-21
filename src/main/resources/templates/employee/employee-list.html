@@ -1,0 +1,20 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<script src="/webjars/jquery/1.9.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+</head>
+<body>
+	<div class="panel panel-default">
+		<div class="panel-body">A Basic Panel</div>
+	</div>
+	<h1 align="center">EMPLOYEE LIST</h1>
+	<ul th:each="emp : ${emplist}">
+		<li><a th:href="@{/emp/update/{id}(id=${emp.empId})}"
+			class="btn btn-primary">EDIT </a></li>
+		<li th:text="${emp.empId}" />
+		<li th:text="${emp.name}" />
+	</ul>
+</body>
+</html>

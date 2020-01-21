@@ -1,0 +1,40 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<script src="/webjars/jquery/1.9.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+</head>
+<body>
+	<div class="panel panel-default">
+		<div class="panel-body">A Basic Panel</div>
+	</div>
+	<div align="center">
+		<h1 align="center">ADD EMPLOYEE</h1>
+		<br>
+		<form action="#" th:action="@{/emp/addemployee}"
+			th:object="${employee}" method="post">
+			<table>
+				<tr>
+					<td><input type="hidden" th:field="*{empId}" id="empId"></td>
+				</tr>
+				<tr>
+					<td><label for="name">Name:</label></td>
+					<td><input type="text" th:field="*{name}" id="name"
+						placeholder="Name"></td>
+					<td><span th:if="${#fields.hasErrors('name')}"
+						th:errors="*{name}"></span></td>
+				</tr>
+				<tr>
+					<td><label for="cName">College Name</label></td>
+					<td><input type="text" th:field="*{cName}" id="cName"
+						placeholder="College Name"></td>
+					<td><span th:if="${#fields.hasErrors('cName')}"
+						th:errors="*{cName}"></span></td>
+				</tr>
+			</table>
+			<input type="submit" value="Add User">
+		</form>
+	</div>
+</body>
+</html>

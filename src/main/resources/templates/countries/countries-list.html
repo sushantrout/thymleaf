@@ -1,0 +1,54 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<script src="/webjars/jquery/1.9.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+<script>
+	$(document).ready(function() {
+	    $("#country").change(function() {
+	        sendAjaxRequest();
+	    });
+	    $("#region").change(function() {
+	    	sendAjaxRequestForRegion();
+	    });
+	});
+	function sendAjaxRequest() {
+	    var country = $("#country").val();
+	    $.get( "/emp/regions?country=" + country, function( data ) {
+	        $("#region").empty();
+	        $("#city").empty();
+	        data.forEach(function(item, i) {
+	            var option = "<option value = " + item + ">" + item +  "</option>";
+	            $("#region").append(option);
+	        });
+	    });
+	};
+	function sendAjaxRequestForRegion() {
+	    var country = $("#region").val();
+	    $.get( "/emp/city?country=" + country, function( data ) {
+	        $("#city").empty();
+	        data.forEach(function(item, i) {
+	            var option = "<option value = " + item + ">" + item +  "</option>";
+	            $("#city").append(option);
+	        });
+	    });
+	};
+	</script>
+</head>
+<body>
+	<h1 align="center">COUNTRIES LIST</h1>
+	<select class="form-control" required="required" id="country">
+		<option disabled="disabled" selected="selected"> 
+	-- Please Select --
+      </option>
+		<option th:each="cnt : ${countries}" th:value="${cnt}"
+			th:text="${cnt}">
+      </option>
+	</select>
+	<select id="region" class="form-control" required="required">
+	</select>
+	<select id="city" class="form-control" required="required">
+	</select>
+</body>
+</html>
